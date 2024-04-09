@@ -1,0 +1,12 @@
+REST Client
+v0.25.1
+Huachao Mao
+4,441,561
+(353)
+REST Client for Visual Studio Code
+
+REST Client allows you to send HTTP request 
+and view the response in Visual Studio Code directly.
+
+Instrucción usada para probar método POST:
+POST http://localhost:4000/cursos/escolares 
