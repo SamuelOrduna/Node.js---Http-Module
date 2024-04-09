@@ -17,10 +17,14 @@ const servidor = http.createServer((req,res)=>{
                 console.log(informacion.cursos.escolares); 
                 // res.end lo manda al usuario
                 res.end(JSON.stringify(informacion.cursos.escolares));
-                // Se debe de mandar en formato JSON la información al usuario.
-                break;
+                // Se debe de mandar en formato JSON la información al usua
             }
-            // En este caso solo soporta el método POST
+            break;
+        case "/cursos/envio":
+            if (metodo === "POST"){
+                manejaPost(req,res);
+            }
+            break;
         default:
             res.statusCode = 404; 
             res.end("Not Found");
@@ -29,3 +33,19 @@ const servidor = http.createServer((req,res)=>{
 }).listen(puerto,()=>{ 
     console.log(`Servidor escuchando en el puerto ${puerto}`);
 });
+
+function manejaPost(req,res){
+    const path = req.url;
+    if (path === "/cursos/envio"){
+        let cuerpo = " ";
+        req.on('data',(contenido)=>{
+            cuerpo += contenido.toString();
+        });
+        req.on('end',()=>{
+            console.log(cuerpo);
+            console.log(typeof cuerpo);
+            res.end("El servidor recibió una solicitud POST a /cursos/envio");
+        })
+
+    }
+}
